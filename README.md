@@ -6,7 +6,7 @@ Windows:
 
 Скомпилировать:
 
-`g++ -c test.cpp complexnum.cpp | g++ test.o complexnum.o -o test`
+`g++ test.o -o test`
 
 Запустить:
 

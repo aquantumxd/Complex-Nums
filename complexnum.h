@@ -1,58 +1,58 @@
-#ifndef COMPLEX_NUMS_COMPLEXNUM_H
-#define COMPLEX_NUMS_COMPLEXNUM_H
+#ifndef COMPLEXNUM_H
+#define COMPLEXNUM_H
 
+#include <cmath>
+#include <sstream>
+#include <iomanip>
 #include <string>
 
+template <typename T>
 class Complex {
-private:
-    double real;
-    double imag;
-
-    static std::string to_str (double num, int precision);
-
 public:
-    Complex();;
-    Complex(double real, double img);
-    Complex(double real, int    img);
-    Complex(int    real, double img);
-    Complex(int    real, int    img);
+  // Constructors
+  Complex();
+  Complex(T real, T imag);
 
-    [[nodiscard]] double getRealNum() const;
-    [[nodiscard]] double getImaginaryNum() const;
+  // Getters
+  T getRealNum() const;
+  T getImaginaryNum() const;
 
-    void setRealNum(double num);
-    void setRealNum(int num);
+  // Setters (using T for consistency)
+  void setRealNum(T num);
+  void setImaginaryNum(T num);
 
-    void setImaginaryNum(double num);
-    void setImaginaryNum(int num);
+  // Arithmetic operators
+  Complex<T> operator+(const Complex<T>& other) const;
+  Complex<T> operator-(const Complex<T>& other) const;
+  Complex<T> operator*(const Complex<T>& other) const;
+  Complex<T> operator*(const T& other) const;
+  Complex<T> operator/(const Complex<T>& other) const;
+  Complex<T> operator/(const T& other) const;
 
-    Complex operator+(const Complex& other) const;
-    Complex operator-(const Complex& other) const;
-    Complex operator*(const Complex& other) const;
-    Complex operator*(const double& other) const;
-    Complex operator*(const int& other) const;
-    Complex operator/(const Complex& other) const;
-    Complex operator/(const double& other) const;
-    Complex operator/(const int& other) const;
+  // Comparison operators
+  bool operator==(const Complex<T>& other) const;
+  bool operator==(const T& other) const;
+  bool operator!=(const Complex<T>& other) const;
+  bool operator!=(const T& other) const;
 
-    bool operator==(const Complex& other) const;
-    bool operator==(const double& other) const;
-    bool operator==(const int& other) const;
+  // Complex number specific functions
+  void pow(unsigned int power);
+  T abs() const;
+  T angle() const;
 
-    bool operator!=(const Complex& other) const;
-    bool operator!=(const double& other) const;
-    bool operator!=(const int& other) const;
+  // Formatting functions
+  std::string generalForm() const;
+  std::string generalForm(int precision) const;
+  std::string polarForm() const;
+  std::string polarForm(int precision) const;
 
-    void pow(unsigned int power);
+private:
+  T real;
+  T imag;
 
-    [[nodiscard]] double abs() const;
-    [[nodiscard]] double angle() const;
-
-    [[nodiscard]] std::string generalForm() const;
-    [[nodiscard]] std::string generalForm(int precision) const;
-
-    [[nodiscard]] std::string polarForm() const;
-    [[nodiscard]] std::string polarForm(int precision) const;
+  // Helper function for string formatting
+  std::string to_str(T num, int precision) const;
 };
 
-#endif //COMPLEX_NUMS_COMPLEXNUM_H
+#include "complexnum.cpp"
+#endif // COMPLEXNUM_H
